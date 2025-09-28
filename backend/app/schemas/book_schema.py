@@ -6,6 +6,7 @@ class BookSchema(Schema):
     autores = fields.Str(required=True)
     paginas = fields.Int(required=True)
     ano_publicacao = fields.Int(required=True)
+    imagem_url = fields.Str(allow_none=True, validate=validate.Length(max=500))
     created_at = fields.DateTime(dump_only=True)
 
 book_schema = BookSchema()

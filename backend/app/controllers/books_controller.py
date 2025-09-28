@@ -14,16 +14,16 @@ def create_book():
     book = book_service.create_book(data)
     return book_schema.dump(book), 201
 
-@bp.get("/<uuid:book_id>")
+@bp.get("/<string:book_id>")
 def get_book(book_id):
     return book_schema.dump(book_service.get_book(book_id))
 
-@bp.put("/<uuid:book_id>")
+@bp.put("/<string:book_id>")
 def update_book(book_id):
     data = book_schema.load(request.get_json())
     return book_schema.dump(book_service.update_book(book_id, data))
 
-@bp.delete("/<uuid:book_id>")
+@bp.delete("/<string:book_id>")
 def delete_book(book_id):
     book_service.delete_book(book_id)
     return "", 204

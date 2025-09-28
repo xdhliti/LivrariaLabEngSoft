@@ -7,6 +7,7 @@ from marshmallow import ValidationError
 
 
 def create_app():
+    from .models import book 
     app = Flask(__name__)
     env = os.getenv("FLASK_ENV", "development")
     from .config import config_by_env
