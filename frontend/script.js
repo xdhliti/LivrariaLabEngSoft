@@ -1,20 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIGURAÇÕES E SELETORES ---
     const API_URL = 'http://127.0.0.1:5000/api/v1/books/';
 
-    // Formulário de Adição
     const addBookForm = document.getElementById('add-book-form');
     
-    // Lista de Livros
     const bookList = document.getElementById('book-list');
 
-    // Modal de Edição
     const editModal = document.getElementById('edit-modal');
     const editBookForm = document.getElementById('edit-book-form');
     const cancelEditBtn = document.getElementById('cancel-edit-btn');
     const editBookId = document.getElementById('edit-book-id');
-
-    // --- FUNÇÕES DA API ---
 
     const fetchBooks = async () => {
         try {
@@ -40,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         books.forEach(book => {
             const bookCard = document.createElement('div');
             bookCard.className = 'book-card';
-            
-            // CORRIGIDO: Usando 'imagem_url' que vem da sua API
+
             const imageUrl = book.imagem_url || 'https://via.placeholder.com/300x400.png?text=Sem+Capa';
 
             bookCard.innerHTML = `
@@ -74,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             autores: formData.get('autores'),
             paginas: parseInt(formData.get('paginas')),
             ano_publicacao: parseInt(formData.get('ano_publicacao')),
-            imagem_url: formData.get('url_imagem') // CORRIGIDO: Enviando 'imagem_url' para a API
+            imagem_url: formData.get('url_imagem')
         };
         try {
             const response = await fetch(API_URL, {
@@ -109,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-autores').value = book.autores;
         document.getElementById('edit-paginas').value = book.paginas;
         document.getElementById('edit-ano_publicacao').value = book.ano_publicacao;
-        document.getElementById('edit-url_imagem').value = book.imagem_url; // CORRIGIDO: Lendo 'imagem_url' para preencher o formulário
+        document.getElementById('edit-url_imagem').value = book.imagem_url;
         editModal.style.display = 'flex';
     };
 
@@ -123,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             autores: document.getElementById('edit-autores').value,
             paginas: parseInt(document.getElementById('edit-paginas').value),
             ano_publicacao: parseInt(document.getElementById('edit-ano_publicacao').value),
-            imagem_url: document.getElementById('edit-url_imagem').value // CORRIGIDO: Enviando 'imagem_url' na atualização
+            imagem_url: document.getElementById('edit-url_imagem').value
         };
         try {
             const response = await fetch(`${API_URL}${bookId}`, {
